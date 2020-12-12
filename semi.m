@@ -1,0 +1,2 @@
+printf('Hi!\n');
+'Hi!'
