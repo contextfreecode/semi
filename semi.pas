@@ -1,24 +1,42 @@
 program Semi;
 
 type
-  TPerson = record
-    name: string;
-    age: integer;
+  TVector = array of Real;
+  TMatrix = array of TVector;
+  TSprite = record
+    kind: String;
+    pos: TVector;
   end;
 
 var
-  i: integer;
-  person: TPerson = (
-    name: 'Alice';
-    age: 42
-  );
-  transform: array[1..2, 1..2] of real = ((1, 2), (3, 4));
+  sprite: TSprite = (kind: 'robot'; pos: (1, 1));
+  viewPos: TVector;
+  // transform: Array[1..2, 1..2] of Real = ((1, 2), (3, 4));
+
+function MatVecMul(mat: TMatrix; vec: TVector): TVector;
+var i, j: Integer;
+begin
+  MatVecMul := nil;
+  SetLength(MatVecMul, Length(mat));
+  for i := 0 to Length(mat) - 1 do begin
+    for j := 0 to Length(vec) - 1 do begin
+      MatVecMul[i] := MatVecMul[i] + mat[i][j] * vec[j];
+    end
+  end
+  // WriteLn('result length ', Length(MatVecMul))
+end;
+
+function Rot(frac: real): TMatrix;
+var rad: Real;
+begin
+  rad := Pi * frac;
+  Rot := TMatrix.create(
+    TVector.create(Cos(rad), -Sin(rad)),
+    TVector.create(Sin(rad), Cos(rad))
+  )
+end;
 
 begin
-  person.name := 'Betty';
-  for i := 1 to 2 do
-  begin
-    person.age := person.age + i;
-  end;
-  writeln(person.name, ' is ', person.age, ' years old.')
+  viewPos := MatVecMul(Rot(0.5), sprite.pos);
+  WriteLn(sprite.kind, ' rotated to ', viewPos[0], viewPos[1])
 end.
