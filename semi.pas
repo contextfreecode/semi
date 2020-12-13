@@ -25,10 +25,10 @@ begin
   // WriteLn('result length ', Length(MatVecMul))
 end;
 
-function Rot(frac: real): TMatrix;
+function Rot(turn: real): TMatrix;
 var rad: Real;
 begin
-  rad := Pi * frac;
+  rad := 2 * Pi * turn;
   Rot := TMatrix.Create(
     TVector.Create(Cos(rad), -Sin(rad)),
     TVector.Create(Sin(rad), Cos(rad))
@@ -36,6 +36,6 @@ begin
 end;
 
 begin
-  viewPos := MatVecMul(Rot(0.5), sprite.Pos);
+  viewPos := MatVecMul(Rot(1 / 4), sprite.Pos);
   WriteLn(sprite.Kind, ' rotated to ', viewPos[0], viewPos[1])
 end.

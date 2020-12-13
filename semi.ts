@@ -22,15 +22,16 @@ function matVecMul(mat: Matrix, vec: Vector): Vector {
   return result;
 }
 
-function rot(frac: number): Matrix {
+function rot(turn: number): Matrix {
   let { PI, cos, sin } = Math;
-  let rad = PI * frac;
+  let rad = 2 * PI * turn;
+  // + 1
   return [[cos(rad), -sin(rad)], [sin(rad), cos(rad)]];
 }
 
 function main() {
   let sprite = { kind: "robot", pos: [1, 1] } as Sprite;
-  let viewPos = matVecMul(rot(0.5), sprite.pos);
+  let viewPos = matVecMul(rot(1 / 4), sprite.pos);
   console.log(`${sprite.kind} rotated to ${viewPos}`);
 }
 
