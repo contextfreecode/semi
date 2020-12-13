@@ -13,6 +13,7 @@ struct Sprite {
 };
 
 auto mat_vec_mul(const Matrix& mat, const Vector& vec) -> Vector {
+  // TODO Find Conor's example. Use range lib?
   // return mat.map((row) =>
   //   row.reduce(
   //     (sum, value, index) => sum + value * vec[index],
@@ -20,8 +21,11 @@ auto mat_vec_mul(const Matrix& mat, const Vector& vec) -> Vector {
   //   ),
   // );
   auto result = Vector(mat.size());
-  for (auto i = std::size_t{0}; i < mat.size(); i += 1) {
-    for (auto j = std::size_t{0}; j < vec.size(); j += 1) {
+  // for (auto i = mat.begin(); i < mat.end(); i += 1) {
+  //   for (auto j = vec.begin(); j < vec.end(); j += 1) {
+  //     result[i - mat.begin()] += i->at(j - vec.begin()) * *j;
+  for (auto i = Vector::size_type{}; i < mat.size(); i += 1) {
+    for (auto j = Vector::size_type{}; j < vec.size(); j += 1) {
       result[i] += mat[i].at(j) * vec[j];
     }
   }
