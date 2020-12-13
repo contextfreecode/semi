@@ -13,7 +13,7 @@ function matVecMul(mat: Matrix, vec: Vector): Vector {
   //     0,
   //   ),
   // );
-  let result = new Array<number>(mat.length).fill(0);
+  let result = new Array(mat.length).fill(0) as Vector;
   for (let i = 0; i < mat.length; i += 1) {
     for (let j = 0; j < vec.length; j += 1) {
       result[i] += mat[i][j] * vec[j];
