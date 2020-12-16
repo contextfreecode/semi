@@ -8,10 +8,7 @@ type Sprite = {
 
 function matVecMul(mat: Matrix, vec: Vector): Vector {
   // return mat.map((row) =>
-  //   row.reduce(
-  //     (sum, value, index) => sum + value * vec[index],
-  //     0,
-  //   ),
+  //   row.reduce((sum, value, index) => sum + value * vec[index], 0)
   // );
   let result = new Array(mat.length).fill(0) as Vector;
   for (let i = 0; i < mat.length; i += 1) {

@@ -1,9 +1,6 @@
-#include <algorithm>
 #include <cmath>
-#include <functional>
 #include <iostream>
 #include <numbers>
-#include <numeric>
 #include <string>
 #include <vector>
 
@@ -17,25 +14,6 @@ struct Sprite {
 
 auto mat_vec_mul(const Matrix& mat, const Vector& vec) -> Vector {
   auto result = Vector(mat.size());
-  // std::transform(
-  //   mat.cbegin(), mat.cend(), result.begin(),
-  //   [&vec](const Vector& row) {
-  //     return std::transform_reduce(
-  //       vec.cbegin(), vec.cend(), row.cbegin(),
-  //       0, std::plus{}, std::multiplies{}
-  //     );
-  //   }
-  // );
-  // // Would like a built-in to vector operation ...
-  // return mat | std::views::transform([&vec](const Vector& row) {
-  //   return std::transform_reduce(
-  //     vec.cbegin(), vec.cend(), row.cbegin(),
-  //     0, std::plus{}, std::multiplies{}
-  //   );
-  // });
-  // // for (auto i = mat.begin(); i < mat.end(); i += 1) {
-  // //   for (auto j = vec.begin(); j < vec.end(); j += 1) {
-  // //     result[i - mat.begin()] += i->at(j - vec.begin()) * *j;
   for (auto i = Vector::size_type{}; i < mat.size(); i += 1) {
     for (auto j = Vector::size_type{}; j < vec.size(); j += 1) {
       result[i] += mat[i].at(j) * vec[j];
@@ -50,7 +28,7 @@ auto rot(double turn) -> Matrix {
 }
 
 auto main() -> int {
-  auto sprite = Sprite {.kind = "robot", .pos = {1, 1}};
+  auto sprite = Sprite{.kind = "robot", .pos = {1, 1}};
   auto view_pos = mat_vec_mul(rot(1 / 4.0), sprite.pos);
   std::cout
     << sprite.kind << " rotated to "
