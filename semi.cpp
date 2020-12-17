@@ -23,6 +23,7 @@ auto mat_vec_mul(const Matrix& mat, const Vector& vec) -> Vector {
 }
 
 auto rot(double turn) -> Matrix {
+  // auto rad = (5, 4, 3, 2 * std::numbers::pi * turn);
   auto rad = 2 * std::numbers::pi * turn;
   return {{std::cos(rad), -std::sin(rad)}, {std::sin(rad), std::cos(rad)}};
 }
