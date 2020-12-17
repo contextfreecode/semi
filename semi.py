@@ -11,12 +11,7 @@ class Sprite(NamedTuple):
 
 
 def mat_vec_mul(mat: Matrix, vec: Vector) -> Vector:
-    # return [sum(a * b for a, b in zip(row, vec)) for row in mat]
-    result = [0.0] * len(mat)
-    for i, row in enumerate(mat):
-        for (a, b) in zip(row, vec):
-            result[i] += a * b
-    return result
+    return [sum(a * b for a, b in zip(row, vec)) for row in mat]
 
 
 def rot(turn: float) -> Matrix:
